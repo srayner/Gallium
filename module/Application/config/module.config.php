@@ -22,6 +22,19 @@ return array(
                     ),
                 ),
             ),
+            
+            // test route
+            'pdf' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/pdf',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'pdf',
+                    ),
+                ),
+            ),
+            
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -94,6 +107,14 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    
+    //Service manager config.
+    'service_manager' => array(
+        'invokables' => array(
+            'pdf_service' => 'Application\Service\PDF'
+        )
+    ),
+    
     // Placeholder for console routes
     'console' => array(
         'router' => array(
@@ -101,4 +122,6 @@ return array(
             ),
         ),
     ),
+    
+    
 );
