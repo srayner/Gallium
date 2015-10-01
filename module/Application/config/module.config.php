@@ -12,16 +12,6 @@ namespace Application;
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
             
             // test route
             'pdf' => array(
@@ -42,7 +32,7 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
@@ -54,7 +44,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => ':controller[/:action[/:id]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -88,7 +78,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index'  => 'Application\Controller\IndexController',
+            'Application\Controller\Method' => 'Application\Controller\MethodController', 
         ),
     ),
     'view_manager' => array(
@@ -109,9 +100,14 @@ return array(
     ),
     
     //Service manager config.
-    'service_manager' => array(
+    'service_manager' => array (
         'invokables' => array(
-            'pdf_service' => 'Application\Service\PDF'
+            'app_method_service' => 'Application\Service\MethodService',
+            'app_method'         => 'Application\Model\Method\Method',
+            'pdf_service'        => 'Application\Service\PDF',
+        ),
+        'factories' => array(
+            'app_method_form' => 'Application\Form\MethodFormFactory',
         )
     ),
     
