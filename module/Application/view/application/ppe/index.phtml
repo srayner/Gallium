@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Personal Protective Equipment</h1>
+        <a class="btn btn-sm btn-success" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'ppe',
+                            'action'     => 'add')); ?>">New PPE</a>
+        <hr>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>PPE Name</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->ppes as $ppe): ?>
+                <tr>
+                    <td><?php echo $ppe->getPpeName(); ?></td>
+                    <td><?php echo $ppe->getImagePath(); ?></td>
+                    <td style="width: 1%;" nowrap>
+                        <a class="btn btn-sm btn-warning" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'ppe',
+                            'action'     => 'edit',
+                            'id'         => $ppe->getPpeId())) ?>">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'ppe',
+                            'action'     => 'delete',
+                            'id'         => $ppe->getPpeId())) ?>">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </body>
+        </table>
+    </div>
+</div>

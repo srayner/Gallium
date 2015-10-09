@@ -1,0 +1,18 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Edit Activity</h1>
+        <hr>
+    
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('application/default', array('controller' => 'activity', 'action' => 'edit', 'id' => $this->activityId)));
+            $form->prepare();
+
+            echo $this->form()->openTag($form);
+            echo $this->formCollection($form);
+            echo $this->form()->closeTag();
+        ?>
+        
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<h1>Delete Project</h1>
+<hr>
+
+<p>Are you sure that you want to delete
+    '<?php echo $this->escapeHtml($this->project->getProjectName()); ?>'
+ </p>
+ <?php
+ $url = $this->url('application/default', array(
+     'controller' => 'project',
+     'action'     => 'delete',
+     'id'         => $this->id,
+ ));
+ ?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="id" value="<?php echo (int) $this->project->getProjectId(); ?>" />
+        <input class="btn btn-sm btn-primary" type="submit" name="del" value="Yes" />
+        <input class="btn btn-sm btn-default" type="submit" name="del" value="No" />
+    </div>
+</form>

@@ -11,9 +11,15 @@ class MethodMapper extends AbstractDbMapper implements MethodMapperInterface, Db
 {
     protected $tableName = 'method';
     
+    public function deleteMethodById($methodId)
+    {
+        return parent::delete(array('method_id' => $methodId));
+    }
+    
     public function getMethods()
     {
-        $select = $this->getSelect();
+        $select = $this->getSelect()
+                       ->where(array('template' => TRUE));
         return $this->select($select);
     }
     
@@ -29,6 +35,13 @@ class MethodMapper extends AbstractDbMapper implements MethodMapperInterface, Db
         $select = $this->getSelect()
                        ->where(array('method_category_id' => $methodCategoryId));
         return $this->select($select)->current();
+    }
+    
+    public function getMethodsByProjectId($projectId)
+    {
+        $select = $this->getSelect()
+                       ->where(array('project_id' => $projectId));
+        return $this->select($select);
     }
     
     public function count($search = null)

@@ -13,7 +13,7 @@ class MethodForm extends Form
         $this->setAttribute('class', 'zend-form');
         
         $this->add(array(
-                'name' => 'method_category_id',
+                'name' => 'category',
                 'options' => array(
                         'label' => 'Category',
                 ),
@@ -24,7 +24,18 @@ class MethodForm extends Form
         ));
         
         $this->add(array(
-                'name' => 'header',
+                'name' => 'sub_category',
+                'options' => array(
+                        'label' => 'Sub-category',
+                ),
+                'attributes' => array(
+                        'type' => 'text',
+                        'class' => 'form-control input-sm'
+                ), 
+        ));
+        
+        $this->add(array(
+                'name' => 'heading',
                 'options' => array(
                         'label' => 'Method Header',
                 ),

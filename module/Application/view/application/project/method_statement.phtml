@@ -1,0 +1,48 @@
+<h1>Method Statement</h1>
+<hr>
+
+<form method="post" action="<?php echo $this->url('application/default', array(
+    'controller' => 'project',
+    'action' => 'create_methods',
+    'id' => $this->projectId
+)) ?>">
+    
+    <!-- Methods -->    
+    <?php foreach ($this->methods as $method): ?>
+    <input type="checkbox" name="method_<?php echo $method->getMethodId();?>" value="<?php echo $method->getMethodId();?>">
+    <?php echo $method->getHeading();?><br>
+    <?php endforeach; ?>
+
+    <!-- Hazardous substances -->
+    <br>
+    <h2>Hazardous Substances</h2>
+    <div class="row">
+        <?php foreach ($this->substances as $substance) :?>
+        <div class="col-md-2 imgcheck text-center">
+            <image src="<?php echo $substance->getImagePath(); ?>">
+            <input type="checkbox" name="substance_<?php echo $substance->getSubstanceId();?>" value="<?php echo $substance->getSubstanceId();?>"></input>
+            <?php echo $substance->getSubstanceName(); ?>      
+        </div>
+        <?php endforeach; ?>  
+    </div>
+    
+    <!-- Ppes -->
+    <br>
+    <h2>Personal Protective Equipment</h2>
+    <div class="row">
+        <?php foreach ($this->ppes as $ppe) :?>
+        <div class="col-md-2 imgcheck text-center">
+            <image width="85" src="<?php echo $ppe->getImagePath(); ?>">
+            <input type="checkbox" name="ppe_<?php echo $ppe->getPpeId();?>" value="<?php echo $ppe->getPpeId();?>"></input>
+            <?php echo $ppe->getPpeName(); ?>      
+        </div>
+        <?php endforeach; ?>  
+    </div>
+
+<br>
+<input class="btn btn-sm btn-primary" type="submit" value="Submit">
+</form>
+<a class="btn btn-sm btn-primary" href="<?php echo $this->url('application/default', array(
+            'controller' => 'project',
+            'action'     => 'risk_assessment',
+            'id'         => $this->projectId));?>">Previous</a>

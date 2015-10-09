@@ -5,18 +5,26 @@ namespace Application\Model\Method;
 class Method implements MethodInterface
 {
     protected $methodId;
-    protected $methodCategoryId;
+    protected $category;
+    protected $subCategory;
     protected $heading;
     protected $body;
-    
+    protected $template;
+    protected $projectId;
+
     function getMethodId()
     {
         return $this->methodId;
     }
 
-    function getMethodCategoryId()
+    function getCategory()
     {
-        return $this->methodCategoryId;
+        return $this->category;
+    }
+    
+    function getSubCategory()
+    {
+        return $this->subCategory;
     }
 
     function getHeading()
@@ -29,15 +37,31 @@ class Method implements MethodInterface
         return $this->body;
     }
 
+    function getTemplate()
+    {
+        return $this->template;
+    }
+    
+    function getProjectId()
+    {
+        return $this->projectId;
+    }
+
     function setMethodId($methodId)
     {
         $this->methodId = $methodId;
         return $this;
     }
 
-    function setMethodCategoryId($methodCategoryId)
+    function setCategory($category)
     {
-        $this->methodCategoryId = $methodCategoryId;
+        $this->category = $category;
+        return $this;
+    }
+    
+    function setSubCategory($subCategory)
+    {
+        $this->subCategory = $subCategory;
         return $this;
     }
 
@@ -52,6 +76,17 @@ class Method implements MethodInterface
         $this->body = $body;
         return $this;
     }
-}
     
-
+    function setTemplate($template)
+    {
+        $this->template = $template;
+        return $this;
+    }
+    
+    function setProjectId($projectId)
+    {
+        $this->projectId = $projectId;
+        return $this;
+    }
+}
+   

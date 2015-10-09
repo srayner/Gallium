@@ -1,0 +1,20 @@
+<h1>Delete Hazardous Substance</h1>
+<hr>
+
+<p>Are you sure that you want to delete
+    '<?php echo $this->escapeHtml($this->substance->getSubstanceName()); ?>'
+ </p>
+ <?php
+ $url = $this->url('application/default', array(
+     'controller' => 'substance',
+     'action'     => 'delete',
+     'id'         => $this->id,
+ ));
+ ?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="id" value="<?php echo (int) $this->substance->getsubstanceId(); ?>" />
+        <input class="btn btn-sm btn-primary" type="submit" name="del" value="Yes" />
+        <input class="btn btn-sm btn-default" type="submit" name="del" value="No" />
+    </div>
+</form>

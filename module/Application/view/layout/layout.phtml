@@ -35,7 +35,11 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('application') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'project')) ?>"><?php echo $this->translate('Projects') ?></a></li>
+                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'activity')) ?>"><?php echo $this->translate('Risks') ?></a></li>
+                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'method')) ?>"><?php echo $this->translate('Methods') ?></a></li>
+                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'substance')) ?>"><?php echo $this->translate('Substances') ?></a></li>
+                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'ppe')) ?>"><?php echo $this->translate('PPEs') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -45,7 +49,8 @@
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p><small>Gallium Application created 2015 - by Steve Rayner
+                        (Williams Refrigeration)</small></p>
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>

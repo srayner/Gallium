@@ -78,8 +78,12 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index'  => 'Application\Controller\IndexController',
-            'Application\Controller\Method' => 'Application\Controller\MethodController', 
+            'Application\Controller\Index'     => 'Application\Controller\IndexController',
+            'Application\Controller\Method'    => 'Application\Controller\MethodController',
+            'Application\Controller\Project'   => 'Application\Controller\ProjectController',
+            'Application\Controller\Activity'  => 'Application\Controller\ActivityController',
+            'Application\Controller\Substance' => 'Application\Controller\SubstanceController',
+            'Application\Controller\Ppe'       => 'Application\Controller\PpeController',
         ),
     ),
     'view_manager' => array(
@@ -102,13 +106,42 @@ return array(
     //Service manager config.
     'service_manager' => array (
         'invokables' => array(
-            'app_method_service' => 'Application\Service\MethodService',
-            'app_method'         => 'Application\Model\Method\Method',
-            'pdf_service'        => 'Application\Service\PDF',
+            'app_activity'            => 'Application\Model\Activity\Activity',
+            'app_activity_hydrator'   => 'Application\Model\Activity\ActivityHydrator',
+            'app_method'              => 'Application\Model\Method\Method',
+            'app_method_hydrator'     => 'Application\Model\Method\MethodHydrator',
+            'app_ppe'                 => 'Application\Model\Ppe\Ppe',
+            'app_ppe_hydrator'        => 'Application\Model\Ppe\PpeHydrator',
+            'app_project'             => 'Application\Model\Project\Project',
+            'app_project_hydrator'    => 'Application\Model\Project\ProjectHydrator',
+            'app_project_substance'   => 'Application\Model\ProjectSubstance\ProjectSubstance',
+            'app_project_ppe'         => 'Application\Model\ProjectPpe\ProjectPpe',
+            'app_substance'           => 'Application\Model\Substance\Substance',
+            'app_substance_hydrator'  => 'Application\Model\Substance\SubstanceHydrator',
+            'pdf_service'             => 'Application\Service\PDF',
+            
         ),
         'factories' => array(
-            'app_method_form' => 'Application\Form\MethodFormFactory',
-        )
+            'app_activity_form'              => 'Application\Form\ActivityFormFactory',
+            'app_activity_mapper'            => 'Application\Model\Activity\ActivityMapperFactory',
+            'app_activity_service'           => 'Application\Service\ActivityServiceFactory',
+            'app_method_form'                => 'Application\Form\MethodFormFactory',
+            'app_method_mapper'              => 'Application\Model\Method\MethodMapperFactory',
+            'app_method_service'             => 'Application\Service\MethodServiceFactory',
+            'app_ppe_form'                   => 'Application\Form\PpeFormFactory',
+            'app_ppe_mapper'                 => 'Application\Model\Ppe\PpeMapperFactory',
+            'app_ppe_service'                => 'Application\Service\PpeServiceFactory',
+            'app_project_form'               => 'Application\Form\ProjectFormFactory',
+            'app_project_mapper'             => 'Application\Model\Project\ProjectMapperFactory',
+            'app_project_service'            => 'Application\Service\ProjectServiceFactory',
+            'app_project_substance_mapper'   => 'Application\Model\ProjectSubstance\ProjectSubstanceMapperFactory',
+            'app_project_substance_service'  => 'Application\Service\ProjectSubstanceServiceFactory',
+            'app_project_ppe_mapper'         => 'Application\Model\ProjectPpe\ProjectPpeMapperFactory',
+            'app_project_ppe_service'        => 'Application\Service\ProjectPpeServiceFactory',
+            'app_substance_form'             => 'Application\Form\SubstanceFormFactory',
+            'app_substance_mapper'           => 'Application\Model\Substance\SubstanceMapperFactory',
+            'app_substance_service'          => 'Application\Service\SubstanceServiceFactory',
+        ),
     ),
     
     // Placeholder for console routes

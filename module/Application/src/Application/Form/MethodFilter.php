@@ -10,7 +10,7 @@ class MethodFilter extends InputFilter
     {
         // header
         $this->add(array(
-            'name'       => 'header',
+            'name'       => 'heading',
             'required'   => true,
             'validators' => array(
                 array(

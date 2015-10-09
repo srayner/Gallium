@@ -1,8 +1,39 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<div class="row">
+    <div class="col-md-12">
+        <h1>Method Statement Templates</h1>
+        <a class="btn btn-sm btn-success" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'method',
+                            'action'     => 'add')) ?>">New Method</a>
+        <hr>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Sub-category</th>
+                    <th>Method</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->methods as $method): ?>
+                <tr>
+                    <td><?php echo $method->getCategory(); ?></td>
+                    <td><?php echo $method->getSubCategory(); ?></td>
+                    <td><?php echo $method->getHeading(); ?></td>
+                    <td style="width: 1%;" nowrap>
+                        <a class="btn btn-sm btn-warning" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'method',
+                            'action'     => 'edit',
+                            'id'         => $method->getMethodId())) ?>">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'method',
+                            'action' => 'delete',
+                            'id'         => $method->getMethodId())) ?>">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </body>
+        </table>
+    </div>
+</div>

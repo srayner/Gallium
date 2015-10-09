@@ -1,8 +1,20 @@
-<?php
+<h1>Delete Method</h1>
+<hr>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<p>Are you sure that you want to delete
+    '<?php echo $this->escapeHtml($this->method->getHeading()); ?>'
+ </p>
+ <?php
+ $url = $this->url('application/default', array(
+     'controller' => 'method',
+     'action'     => 'delete',
+     'id'         => $this->id,
+ ));
+ ?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="id" value="<?php echo (int) $this->method->getMethodId(); ?>" />
+        <input class="btn btn-sm btn-primary" type="submit" name="del" value="Yes" />
+        <input class="btn btn-sm btn-default" type="submit" name="del" value="No" />
+    </div>
+</form>

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Hazardous Substances</h1>
+        <a class="btn btn-sm btn-success" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'substance',
+                            'action'     => 'add')); ?>">New Hazardous Substance</a>
+        <hr>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Substance Name</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->substances as $substance): ?>
+                <tr>
+                    <td><?php echo $substance->getSubstanceName(); ?></td>
+                    <td><?php echo $substance->getImagePath(); ?></td>
+                    <td style="width: 1%;" nowrap>
+                        <a class="btn btn-sm btn-warning" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'substance',
+                            'action'     => 'edit',
+                            'id'         => $substance->getSubstanceId())) ?>">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'substance',
+                            'action'     => 'delete',
+                            'id'         => $substance->getSubstanceId())) ?>">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </body>
+        </table>
+    </div>
+</div>

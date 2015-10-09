@@ -36,4 +36,18 @@ class Module
             ),
         );
     }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'initializers' => array(
+                function($instance, $sm){  
+                    if($instance instanceof Service\DbAdapterAwareInterface){
+                        $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                        return $instance->setDbAdapter($dbAdapter);
+                    }
+                },
+            )
+        );
+    }
 }

@@ -10,7 +10,7 @@ class MethodHydrator extends ClassMethods
     public function extract($object)
     {
         if (!$object instanceof MethodInterface) {
-            throw new Exception\InvalidArgumentException('$object must be an instance of Application\Model\Method\MethodInterface');
+            throw new \InvalidArgumentException('$object must be an instance of Application\Model\Method\MethodInterface');
         }
         $data = parent::extract($object);
         
@@ -20,7 +20,7 @@ class MethodHydrator extends ClassMethods
     public function hydrate(array $data, $object)
     {
         if (!$object instanceof MethodInterface) {
-            throw new Exception\InvalidArgumentException('$object must be an instance of Application\Model\Method\MethodInterface');
+            throw new \InvalidArgumentException('$object must be an instance of Application\Model\Method\MethodInterface');
         }       
         return parent::hydrate($data, $object);
     }  

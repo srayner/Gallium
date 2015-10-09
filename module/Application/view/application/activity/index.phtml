@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Activities</h1>
+        <a class="btn btn-sm btn-success" href="<?php echo $this->url('application/default', array(
+            'controller' => 'activity',
+            'action'     => 'add'));?>">Add Activity</a>
+        <hr>
+        <?php foreach ($this->activities as $activity): ?>
+        <span><b>Activity: </b></span><span><?php echo $activity->getActivity();?></span>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hazard</th>
+                    <th>Risk</th>
+                    <th>Control Measures</th>
+                    <th>Final Risk</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo $activity->getHazard(); ?></td>
+                    <td><?php echo $activity->getRisk() ?></td>
+                    <td><?php echo $activity->getControlMeasures(); ?></td>
+                    <td><?php echo $activity->getFinalRisk() ?></td>
+                    <td style="width: 1%;" nowrap>
+                        <a class="btn btn-sm btn-warning" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'activity',
+                            'action'     => 'edit',
+                            'id'         => $activity->getActivityId())) ?>">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="<?php echo $this->url('application/default', array(
+                            'controller' => 'activity',
+                            'action'     => 'delete',
+                            'id'         => $activity->getActivityId())) ?>">Delete</a>
+                    
+                    </td>
+                </tr>
+                
+            </body>
+        </table>
+        <span><b>Person at risk: </b></span><span><?php echo $activity->getPersonAtRisk();?></span>
+        <hr>
+        <?php endforeach; ?>
+        
+    </div>
+</div>
