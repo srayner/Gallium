@@ -9,49 +9,55 @@ class MethodService
     /**
      * @var MethodMapperInterface
      */
-    protected $methodMapper;
+    protected $mapper;
     
     public function deleteMethodById($methodId)
     {
-        return $this->methodMapper->deleteMethodById($methodId);
+        return $this->mapper->deleteMethodById($methodId);
     }
     
     function getMethodMapper()
     {
-        return $this->methodMapper;
+        return $this->mapper;
     }
 
     function setMethodMapper(MethodMapperInterface $methodMapper)
     {
-        $this->methodMapper = $methodMapper;
+        $this->mapper = $methodMapper;
         return $this;
     }
     
     function getMethods()
     {
-        return $this->methodMapper->getMethods();
+        return $this->mapper->getMethods();
     }
     
     function getMethodById($id)
     {
-        return $this->methodMapper->getMethodById($id);
+        return $this->mapper->getMethodById($id);
     }
     
     public function getMethodsByProjectId($projectId)
     {
-        return $this->methodMapper->getMethodsByProjectId($projectId);
+        return $this->mapper->getMethodsByProjectId($projectId);
     }
     
     function persist($method)
     {
-        return $this->methodMapper->persist($method);
+        return $this->mapper->persist($method);
+    }
+    
+    public function deleteByProjectId($projectId)
+    {
+        return $this->mapper->deleteByProjectId($projectId);
     }
     
     function cloneMethod($methodId, $projectId)
     {
-        $method = $this->methodMapper->getMethodById($methodId);
+        $method = $this->mapper->getMethodById($methodId);
         $method->setMethodId(null);
         $method->setProjectId($projectId);
+        $method->setTemplate(FALSE);
         return $this->persist($method);
     }
 }

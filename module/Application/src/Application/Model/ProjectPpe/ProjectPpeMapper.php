@@ -11,9 +11,9 @@ class ProjectPpeMapper extends AbstractDbMapper implements ProjectPpeMapperInter
     
     public function getProjectPpes($projectId)
     {
-        $select = $this->getSelect();
-        return $this->select($select)
-                    ->where(array('project_id' => $projectId));
+        $select = $this->getSelect()
+                       ->where(array('project_id' => $projectId));
+        return $this->select($select);
     }
     
     public function deleteProjectPpes($projectId)

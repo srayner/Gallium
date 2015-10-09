@@ -1,0 +1,84 @@
+
+<img src="data/images/WilliamsLogo.png">
+
+<h2>Method Statement</h2>
+
+<h1><?php echo $project->getProjectName();?></h1>
+
+<table>
+    <tr>
+        <td><b>Project Ref:</b></td>
+        <td><?php echo $project->getProjectRef();?></td>
+    </tr>
+    <tr>
+        <td><b>Site Address:</b></td>
+        <td>
+            <?php echo $project->getSiteAddress1();?><br>
+            <?php echo $project->getSiteAddress2();?><br>
+            <?php echo $project->getSiteAddress3();?><br>
+            <?php echo $project->getSiteAddress4();?><br>
+            <?php echo $project->getPostCode();?>
+        </td>
+    </tr>
+    <tr>
+        <td><b>Client:</b></td>
+        <td><?php echo $project->getClientName();?></td>
+    </tr>
+    <tr>
+        <td><b>Principle Contractor:</b></td>
+        <td><?php echo $project->getPrincipleContractor();?></td>
+    </tr>
+    <tr>
+        <td><b>Location of works:</b></td>
+        <td><?php echo $project->getLocationOfWorks();?></td>
+    </tr>
+    <tr>
+        <td><b>Project Start Date:</b></td>
+        <td><?php echo $project->getStartDate()->format('d/m/Y');?></td>
+    </tr>
+    <tr>
+        <td><b>Project End Date:</b></td>
+        <td><?php echo $project->getEndDate()->format('d/m/Y');?></td>
+    </tr>
+    <tr>
+        <td><b>Site Supervisor Name:</b></td>
+        <td><?php echo $project->getSiteSupervisorName();?></td>
+    </tr>
+    <tr>
+        <td><b>Site Supervisor Phone:</b></td>
+        <td><?php echo $project->getSiteSupervisorPhone();?></td>
+    </tr>
+</table>        
+<br>
+
+<h2>Methods</h2>     
+<?php foreach($methods as $method):?>
+<h3><?php echo $method->getHeading();?></h3>
+<p><?php echo $method->getBody();?></p>
+
+<?php endforeach;?>
+
+<h2>Hazardous Substances</h2>  
+<table>
+    <tr>
+        <?php foreach ($substances as $substance):?>
+        <td class="center">
+            <img src="public/<?php echo $substance->getImagePath();?>">
+            <?php echo $substance->getSubstanceName();?>
+        </td>
+        <?php endforeach;?>
+    </tr>
+</table>
+
+<h2>Personal Protective Equipment</h2>  
+<table>
+    <tr>
+        <?php foreach ($ppes as $ppe):?>
+        <td class="center">
+            <img width="85" src="public/<?php echo $ppe->getImagePath();?>">    
+            <?php echo $ppe->getPpeName();?>
+        </td>
+        <?php endforeach;?>
+    </tr>
+</table>
+

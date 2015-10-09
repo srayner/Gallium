@@ -68,6 +68,11 @@ class MethodMapper extends AbstractDbMapper implements MethodMapperInterface, Db
         return $method;        
     }
     
+    public function deleteByProjectId($projectId)
+    {
+        return parent::delete(array('project_id' => $projectId));
+    }
+    
     protected function insert($entity, $tableName = null, HydratorInterface $hydrator = null)
     {
         $result = parent::insert($entity, $tableName, $hydrator);

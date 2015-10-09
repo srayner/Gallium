@@ -11,6 +11,7 @@
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",
         "tecnickcom/tcpdf": "^6.2",
-        "zf-commons/zfc-base": "^0.1.2"
+        "zf-commons/zfc-base": "^0.1.2",
+        "dompdf/dompdf": "^0.6.1"
     }
 }

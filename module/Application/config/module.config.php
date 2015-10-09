@@ -118,8 +118,6 @@ return array(
             'app_project_ppe'         => 'Application\Model\ProjectPpe\ProjectPpe',
             'app_substance'           => 'Application\Model\Substance\Substance',
             'app_substance_hydrator'  => 'Application\Model\Substance\SubstanceHydrator',
-            'pdf_service'             => 'Application\Service\PDF',
-            
         ),
         'factories' => array(
             'app_activity_form'              => 'Application\Form\ActivityFormFactory',

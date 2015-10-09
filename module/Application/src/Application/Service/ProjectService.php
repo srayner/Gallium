@@ -63,10 +63,11 @@ class ProjectService
     
     public function createMethods($methodIds, $projectId)
     {
+        $service = $this->serviceLocator->get('app_method_service');
+        $service->deleteByProjectId($projectId);
         foreach($methodIds as $methodId)
         {
-            $methodService = $this->serviceLocator->get('app_method_service');
-            $methodService->cloneMethod($methodId, $projectId);
+            $service->cloneMethod($methodId, $projectId);
         }
         return $this;
     }

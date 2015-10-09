@@ -37,4 +37,8 @@ class PpeService
         return $this->mapper->deletePpeById($ppeId);
     }
    
+    public function getPpesByProjectId($projectId)
+    {
+        return $this->mapper->getPpesByProjectId($projectId);
+    }
 }

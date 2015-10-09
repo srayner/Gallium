@@ -158,94 +158,31 @@ class ProjectController extends AbstractActionController
     
     public function previewAction()
     {
+        require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+        
         // Generate and output a method statment.
         $projectId = (int) $this->params()->fromRoute('id', 0);
         $project = $this->getProjectService()->getProjectById($projectId);
-        $pdfService = $this->getServiceLocator()->get('pdf_service');
         
         $methodService = $this->getServiceLocator()->get('app_method_service');
         $methods = $methodService->getMethodsByProjectId($projectId);
         
-        $service = $this->getServiceLocator()->get('app_substance_service');
-        $substances = $service->getSubstancesByProjectId($projectId);
+        $substanceService = $this->getServiceLocator()->get('app_substance_service');
+        $substances = $substanceService->getSubstancesByProjectId($projectId);
         
+        $ppeService = $this->getServiceLocator()->get('app_ppe_service');
+        $ppes = $ppeService->getPpesByProjectId($projectId);
         
-      //  $service = $this->getServiceLocator()->get('app_project_ppe_service');
-      //  $ppe = $service->getProjectPpes($projectId);
-        
-        $doc = $pdfService->generateDocument();
-        
-        $doc->setImageScale(1.53);
-        $doc->Image('data/images/WilliamsLogo.png', 10, 10);
-        
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->writeLine($doc, '', 10);
-        
-        $pdfService->writeLine($doc, 'Method Statement', 16, 'B');
-        $pdfService->writeLine($doc, $project->getProjectName(), 24);
-        
-        // Ref
-        $pdfService->write($doc, 'Project Ref: ', 10);
-        $pdfService->writeLine($doc, $project->getProjectRef(), 10, 'B');    
-       
-        // Address
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->writeLine($doc, 'Site Address:', 10);
-        $pdfService->writeLine($doc, $project->getSiteAddress1(), 10, 'B');
-        $pdfService->writeLine($doc, $project->getSiteAddress2(), 10, 'B');
-        $pdfService->writeLine($doc, $project->getSiteAddress3(), 10, 'B');
-        $pdfService->writeLine($doc, $project->getSiteAddress4(), 10, 'B');
-        $pdfService->writeLine($doc, $project->getPostCode(), 10, 'B');
-        
-        // Client
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Client: ', 10);
-        $pdfService->writeLine($doc, $project->getClientName(), 10, 'B');
-        
-        // Contrator
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Principle Contractor: ', 10);
-        $pdfService->writeLine($doc, $project->getPrincipleContractor(), 10, 'B');
-        
-        // Location of works
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Location of works: ', 10);
-        $pdfService->writeLine($doc, $project->getLocationOfWorks(), 10, 'B');
-        
-        // Start and end date
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Start and end date: ', 10);
-        $pdfService->write($doc, $project->getStartDate()->format('d/m/Y') . ' to ', 10, 'B');
-        $pdfService->writeLine($doc, $project->getEndDate()->format('d/m/Y'), 10, 'B');
-        
-        // Supervisor
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Site Supervisor Name: ', 10);
-        $pdfService->writeLine($doc, $project->getSiteSupervisorName(), 10, 'B');
-        
-        // Supervisor Phone
-        $pdfService->writeLine($doc, '', 10);
-        $pdfService->write($doc, 'Site Supervisor Phone: ', 10);
-        $pdfService->writeLine($doc, $project->getSiteSupervisorPhone(), 10, 'B');
-        
-        
-        foreach($methods as $method)
-        {                    
-            $pdfService->writeLine($doc, '', 10);
-            $pdfService->writeLine($doc, $method->getHeading(), 11, 'B');
-            $pdfService->writeLine($doc, $method->getBody(), 10);
-            
-        }
-      
-        foreach ($substances as $substance)
-        {
-            $pdfService->addImage($doc, $substance->getImagePath());
-        }
-        
-        $doc->Output('example_001.pdf', 'I');
+        ob_start();
+        include('./data/pdf/style.phtml');
+        include('./data/pdf/template.phtml');
+        $html = ob_get_contents();
+        ob_end_clean();
+
+        $dompdf = new \DOMPDF();
+        $dompdf->load_html($html);
+        $dompdf->render();
+        $dompdf->stream("sample.pdf", array("Attachment" => 0));   
     }
     
     private function redirectTo($next, $id)
@@ -261,11 +198,6 @@ class ProjectController extends AbstractActionController
         return $this->redirect()->toRoute('application/default', array(
             'controller' => 'project'
         ));
-    }
-    
-    public function fontAction()
-    {
-        $pdf->addTTFfont('/path-to-font/DejaVuSans.ttf', 'TrueTypeUnicode', '', 32);
     }
     
     private function extractValues($data, $prefix)

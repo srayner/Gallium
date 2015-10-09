@@ -11,7 +11,7 @@ class PpeMapper extends AbstractDbMapper implements PpeMapperInterface, DbAdapte
 {
     protected $tableName = 'ppe';
     
-    public function deletePPeById($ppeId)
+    public function deletePpeById($ppeId)
     {
         return parent::delete(array('ppe_id' => $ppeId));
     }
@@ -27,6 +27,14 @@ class PpeMapper extends AbstractDbMapper implements PpeMapperInterface, DbAdapte
         $select = $this->getSelect()
                        ->where(array('ppe_id' => $ppeId));
         return $this->select($select)->current();
+    }
+    
+    public function getPpesByProjectId($projectId)
+    {
+        $select = $this->getSelect()
+                       ->join('project_ppe', 'ppe.ppe_id = project_ppe.ppe_id')
+                       ->where(array('project_ppe.project_id' => $projectId));
+        return $this->select($select);
     }
     
     public function persist(PpeInterface $ppe)
